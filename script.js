@@ -98,16 +98,21 @@ var addIcon = document.getElementById('addIcon')
 addIcon.addEventListener('click', () => {
     var myUL = document.getElementById('myUL')
     var newLI = document.createElement('li')
-    var newLIClass = "flex items-center space-x-3"
+    var newLIClass = "relative flex items-center space-x-3"
+    var newInputLabel = document.createElement('input')
+    var newInputLabelClass = "absolute -top-7 left-3 focus:outline-none placeholder-gray-600 text-gray-600 md:text-lg lg:text-xl"
     var newInput = document.createElement('input')
     var newInputClass = "foodCalorieInput block border border-black focus:border-indigo-600 focus:outline-none px-3 py-1 lg:p-3 text-xl sm:text-2xl lg:text-3xl w-11/12 sm:w-1/2 md:w-1/3"
     var closeIcon = document.createElement('i')
     var closeIconClass = "fas fa-times duration-200 text-2xl text-red-500 hover:opacity-70 cursor-pointer"
     closeIcon.className = closeIconClass
+    newInputLabel.className = newInputLabelClass
+    newInputLabel.placeholder = "Food Name"
     newInput.className = newInputClass
     newInput.placeholder = "Food Calorie"
     newInput.type = "tel"
     newLI.className = newLIClass
+    newLI.appendChild(newInputLabel)
     newLI.appendChild(newInput)
     newLI.appendChild(closeIcon)
     myUL.appendChild(newLI)

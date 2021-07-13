@@ -83,6 +83,28 @@ calculateBtn.addEventListener('click', () => {
 
 })
 
+// clear button event listener. For clearing all the dynamic things  
+var clearBtn = document.getElementById('clearBtn')
+clearBtn.addEventListener('click', () => {
+    // get all the dynamic element
+    var foodName = document.getElementsByClassName('foodName')
+    var foodCalorieInput = document.getElementsByClassName('foodCalorieInput')
+    var totalCalToEat = document.getElementById('totalCalToEat')
+    var eatenCal = document.getElementById('eatenCal')
+    var remainingCal = document.getElementById('remainingCal')
+
+    // clearing the value or text
+    for(var i = 0; i < foodName.length; i++)
+    {
+        foodName[i].value = ""
+        foodCalorieInput[i].value = ""
+        totalCalToEat.value = ""
+        removeAllText(eatenCal)
+        removeAllText(remainingCal)
+    }
+
+})
+
 // delete the list functionality (close icon)
 var closeIcon = document.getElementsByClassName('fa-times')
 for (var i = 0; i < closeIcon.length; i++)
@@ -100,7 +122,7 @@ addIcon.addEventListener('click', () => {
     var newLI = document.createElement('li')
     var newLIClass = "relative flex items-center space-x-3"
     var newInputLabel = document.createElement('input')
-    var newInputLabelClass = "absolute -top-7 left-3 focus:outline-none placeholder-gray-600 text-gray-600 md:text-lg lg:text-xl"
+    var newInputLabelClass = "foodName absolute -top-7 left-3 focus:outline-none placeholder-gray-600 text-gray-600 md:text-lg lg:text-xl"
     var newInput = document.createElement('input')
     var newInputClass = "foodCalorieInput block border border-black focus:border-indigo-600 focus:outline-none px-3 py-1 lg:p-3 text-xl sm:text-2xl lg:text-3xl w-11/12 sm:w-1/2 md:w-1/3"
     var closeIcon = document.createElement('i')
@@ -128,3 +150,32 @@ addIcon.addEventListener('click', () => {
     }
 
 })
+
+// function for removing a text inside an element. Big thanks to stackoverflow ;)
+function removeAllText(element) {
+
+    // loop through all the nodes of the element
+    var nodes = element.childNodes;
+
+    for(var i = 0; i < nodes.length; i++) {
+
+        var node = nodes[i];
+
+        // if it's a text node, remove it
+        if(node.nodeType == Node.TEXT_NODE) {
+
+            node.parentNode.removeChild(node);
+
+
+            i--; // have to update our incrementor since we just removed a node from childNodes
+
+        } else
+
+        // if it's an element, repeat this process
+        if(node.nodeType == Node.ELEMENT_NODE) {
+
+            removeAllText(node);
+
+        }
+    }
+}
